@@ -1,4 +1,5 @@
 import { Invoice } from "./classes/Invoice.js";
+import { ListTemplate } from "./classes/ListTemplate.js";
 import { Payment } from "./classes/Payment.js";
 import { HasFormatter } from "./interfaces/hasFormatter.js";
 // import { IsPerson } from "./interfaces/isPerson.js";
@@ -41,6 +42,9 @@ import { HasFormatter } from "./interfaces/hasFormatter.js";
 // })
 // invoiceOne.amount = 40
 
+const ul = document.querySelector('.item-list') as HTMLUListElement;
+const list = new ListTemplate(ul)
+
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
 const type = document.querySelector('#type') as HTMLSelectElement;
@@ -60,8 +64,7 @@ form.addEventListener('submit', (e: Event) => {
     }else{
         doc = new Payment(toFrom.value, details.value, amount.valueAsNumber)
     }
-    
-    console.log(doc)
+
+    list.render(doc, type.value, 'end')
+
 })
-
-
